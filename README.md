@@ -1,4 +1,4 @@
-# Task-logger-Time-management
+# Task-logger-Time-manager
 Simple terminal task logger / time manager application with a simple data visualization module.
 
 If you want to see a simple graph(instead of the bar graph) in the terminal showing the time spent on each task/activity, you can pass the parameter 'plot' to the function *user_data_visualize()*
