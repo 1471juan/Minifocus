@@ -1,5 +1,4 @@
 class User():
-    # USER_LOG_ACTIONS=['READING', 'LISTENING', 'WRITING']
     def __init__(self, username):
         self.username=username
         self.user_logs=[]
@@ -11,6 +10,10 @@ class User():
     def Log_action_add(self,action):
         self.USER_LOG_ACTIONS.append(action)
         print('New action created: '+ action)
+    #deletes an action from the user_log_actions array
+    def Log_action_remove(self,action):
+        self.USER_LOG_ACTIONS.remove(action)
+        print('Action removed: '+ action)
     #returns all the user's logs
     def Logs_get(self):
         return self.user_logs

@@ -3,3 +3,5 @@ class Log():
         self.minutes = minutes
         self.action = action
         self.description = description
+
+        

@@ -1,8 +1,6 @@
 # Module to visualize array's data in the terminal
 # jmanuel.pgp@gmail.com
 
-# https://en.m.wikipedia.org/wiki/ANSI_escape_code#Colors
-
 class MiniPlot():
 
     #Returns the closest integrer 
