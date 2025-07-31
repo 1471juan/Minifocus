@@ -19,7 +19,7 @@ users = []
 users_logs = []
 
 print('          _          ')
-print('|\/| ._  |__  _    _ ')
+print(r'|\/| ._  |__  _    _ ')
 print('|  ||| |||(_)(_|_|_> ')
 print('---------------------')
 print("'help' for a list of all commands.")
