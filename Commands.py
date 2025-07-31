@@ -26,7 +26,7 @@ print("'help' for a list of all commands.")
 #Commands
 def Validate(user):
     msg = input('_> ')
-    os.system('clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
     def validate_action(value):
         i=0
         while(i<len(user.USER_LOG_ACTIONS)):
