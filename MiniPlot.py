@@ -1,5 +1,4 @@
 # Module to visualize array's data in the terminal
-# jmanuel.pgp@gmail.com
 
 class MiniPlot():
 
