@@ -4,4 +4,19 @@ Simple terminal task logger / time manager application with a simple data visual
 If you want to see a simple graph(instead of the bar graph) in the terminal showing the time spent on each task/activity, you can pass the parameter 'plot' to the function *user_data_visualize()*
 which is called with the visualize command inside Commands.py
 
-This application doesn't store any data, that means it will delete all logs after exiting. :(
+This application doesn't store any data.
+
+<img width="258" height="97" alt="Code_MemJFuZYJj" src="https://github.com/user-attachments/assets/5b106965-cb3d-4c18-8b4b-cee299e9922d" />
+
+## Commands
+- `help` : Print all commands.
+- `action_add` : Adds an action. eg: Reading
+- `action_remove` : Removes an action.
+- `log_add` : Creates a log with an action, the time in minutes and a description.
+- `time_total` : Prints the total time spent.
+- `time` : Prints the time spent for a specific action.
+- `log_show` : Prints all the user logs.
+- `visualize` : Visualize the time spent with stars for each action.
+- `pomodoro` : Pomodoro, It will ask for task length, break length, quantity of tasks in the session, and to select the tasks.
+- `exit` : Exits the application.
+
