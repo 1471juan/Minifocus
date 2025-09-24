@@ -108,3 +108,22 @@ def db_load_logs(username):
 
     connection.close()
     return logs
+
+#search
+def db_logs_search(username,action):
+    if isinstance(username, tuple):
+        username = username[0]
+    connection = db_connect()
+    cursor = connection.cursor()
+    cursor.execute("""
+        SELECT logs.log, logs.time
+        FROM logs
+        JOIN actions ON logs.action_id = actions.id
+        JOIN users ON actions.user_id = users.id
+        WHERE users.username = ?
+        AND actions.action LIKE ?
+    """, (username, f"%{action}%"))
+    
+    logs = cursor.fetchall()
+    connection.close()
+    return logs

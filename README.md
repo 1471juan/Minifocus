@@ -15,6 +15,7 @@ Simple terminal task logger / time manager application with a simple data visual
 - `time_total` : Prints the total time spent.
 - `time` : Prints the time spent for a specific action.
 - `log_show` : Prints all the user logs.
+- `log_search <action>` : search for all logs given a specific action
 - `visualize` : Visualize the time spent with stars for each action.
 - `pomodoro` : Pomodoro, It will ask for task length, break length, quantity of tasks in the session, and to select the tasks.
 - `exit` : Exits the application.

@@ -7,11 +7,9 @@ APP_VERSION = 'VERSION: 0.3'
 def APP_INIT():
 
     print(APP_VERSION)
-
     db_create_tables()
     login()
     load_data()
-
     Validate(users[0])
 
 APP_INIT()
