@@ -102,7 +102,15 @@ def Validate(user):
             users_logs_search(user,param)
 
     elif(msg=='visualize'):
-        user_data_visualize(user, figure='bar')
+        user_data_visualize(user)
+
+    elif msg.startswith('visualize_plot'):
+        param = msg.split(maxsplit=1)
+        if len(param) < 2:
+            print("you need to specify an action")
+        else:
+            user_data_visualize_plot(user,param)
+        
 
     elif(msg=='pomodoro'):
         user_pomodoro(user)
@@ -150,7 +158,7 @@ def users_time_spent():
     print("----------------------------")
     for i in users:
         print(i.username +' total time spent in minutes: '+ str(i.time_minutes())+ "; in hours: "+ str(i.time_minutes()/60))
-        user_data_visualize(i,'bar')
+        user_data_visualize(i)
     print("----------------------------")
 
 #returns a user's time spent on a specific action
@@ -199,27 +207,34 @@ def user_logs_show(user):
         i += 1
 
 #visualize data
-def user_data_visualize(user,figure='bar'):
+def user_data_visualize(user):
     time_spent_on_each_action=[] 
     i=0
     while(i<len(user.USER_LOG_ACTIONS)):
         time_spent_on_each_action.append(user.Log_action_time(user.USER_LOG_ACTIONS[i]))
         i+=1
-    if(figure=='bar'):
-        MiniPlot.bar(time_spent_on_each_action,user.USER_LOG_ACTIONS)
-    elif(figure=='plot'):
-        MiniPlot.plot(time_spent_on_each_action)
-    
+    MiniPlot.bar(time_spent_on_each_action,user.USER_LOG_ACTIONS)
+
+#visualize plot
+def user_data_visualize_plot(user,param):
+    tmp_action = param[1]
+    tmp_logs = db_logs_search(user.username, tmp_action)
+    tmp_logs_time=[]
+    if not tmp_logs:
+        print(f"Either {tmp_action} does not exist or there is typo.")
+    else:
+        for log, time in tmp_logs:
+            tmp_logs_time.append(time)
+
+    MiniPlot.plot(tmp_logs_time)
 
 def user_pomodoro_tasks_sort(user,pomodoro_numberOfTasks):
-
     pomodoro_tasks = []
     while pomodoro_numberOfTasks:
         print("Select tasks: ")
         for task in user.USER_LOG_ACTIONS:
             if not task in pomodoro_tasks: print(" -> " + task)
         print("{} tasks remaining.".format(pomodoro_numberOfTasks))
-
         tmp_task=input("TASK: ")
 
         i=0
@@ -230,7 +245,6 @@ def user_pomodoro_tasks_sort(user,pomodoro_numberOfTasks):
             else:
                 print('Action not found. Please try again.')
             i+=1
-
     return pomodoro_tasks
 
 def user_pomodoro(user):

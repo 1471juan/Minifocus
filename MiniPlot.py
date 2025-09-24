@@ -6,16 +6,30 @@ class MiniPlot():
     def floor(n):
         return int(n - (n % 1))
 
+    def plot(data, show_xAxis=True):
+        obj = ''
+        for row in range( max(data), min(data) - 1, -1):
+            line = f"{row:2} | "
+            for val in data:
+                if val == row:
+                    line += '*' + ' ' * 4
+                else:
+                    line += ' ' * (5)
+            obj += line + '\n'
+
+        if show_xAxis:
+            axis_line = '   +' + '-' * ((5) * len(data)) + '\n'
+            labels_line = '    ' + ''.join(f"{str(v):<{5}}" for v in data) + '\n'
+            obj += axis_line + labels_line
+        print(obj)
+
     #Points graph from array
-    def plot(data,show_xAxis=False):
+    def plot_old(data,show_xAxis=True):
         object = ''
-        #Add 1
-        # data.append(1)
-        # Sort the array
         data.sort(reverse=True)
 
         if(len(str(data[0]))>=3):
-            data_divider=10
+            data_divider=5
         else:
             data_divider=len(str(data[0]))
         data_compressed=[]
