@@ -1,13 +1,16 @@
 #Simple time/activity tracker
-from Commands import Validate, user_add, users
+from Commands import Validate, login, users, load_data
+from Database import db_create_tables
 # CONSTANTS
-APP_VERSION = 'VERSION: 0.2'
+APP_VERSION = 'VERSION: 0.3'
 
 def APP_INIT():
 
     print(APP_VERSION)
 
-    user_add('1471juan')
+    db_create_tables()
+    login()
+    load_data()
 
     Validate(users[0])
 

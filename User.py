@@ -1,5 +1,6 @@
 class User():
-    def __init__(self, username):
+    def __init__(self, username, id):
+        self.id = id
         self.username=username
         self.user_logs=[]
         self.USER_LOG_ACTIONS=['READING', 'LISTENING', 'WRITING']

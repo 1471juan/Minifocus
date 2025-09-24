@@ -1,7 +1,11 @@
-# Task-logger-Time-manager
+```          
+          _          
+|\/| ._  |__  _    _ 
+|  ||| |||(_)(_|_|_> 
+---------------------
+VERSION: 0.3
+```
 Simple terminal task logger / time manager application with a simple data visualization module and pomodoro timer.
-
-<img width="258" height="97" alt="Code_MemJFuZYJj" src="https://github.com/user-attachments/assets/5b106965-cb3d-4c18-8b4b-cee299e9922d" />
 
 ## Commands
 - `help` : Print all commands.
@@ -16,5 +20,5 @@ Simple terminal task logger / time manager application with a simple data visual
 - `exit` : Exits the application.
 
 ## Note
-This application doesn't store any data.
+This application stores data locally with SQL3
 

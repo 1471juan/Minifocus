@@ -3,6 +3,7 @@ from User import User
 from Log import Log
 from MiniPlot import MiniPlot
 from Pomodoro import Pomodoro
+from Database import db_add_action, db_add_log, db_get_action_id,db_load_actions,db_load_logs,db_load_users,db_add_user
 
 commands_list=[
     'action_add - Adds an action',
@@ -22,9 +23,25 @@ print('          _          ')
 print(r'|\/| ._  |__  _    _ ')
 print('|  ||| |||(_)(_|_|_> ')
 print('---------------------')
-print("'help' for a list of all commands.")
+
+#login
+def login():
+    u=db_load_users()
+    if u:
+        for i, user in enumerate(u):
+            user_add(user,i+1)
+
+    msg = input('login username: ')
+    os.system('cls' if os.name == 'nt' else 'clear')
+    if msg not in u:
+        user_add(msg,len(users)+1)
+        db_add_user(msg)
+    
+
+
 #Commands
 def Validate(user):
+    print("'help' for a list of all commands.")
     msg = input('_> ')
     os.system('cls' if os.name == 'nt' else 'clear')
     def validate_action(value):
@@ -50,6 +67,8 @@ def Validate(user):
     elif(msg=='action_add'):
         value=input('New action name: ')
         user.Log_action_add(value)
+        #save action
+        db_add_action(user.id,value)
     elif(msg=='action_remove'):
         value=input('Action to remove: ')
         user.Log_action_remove(value)
@@ -59,6 +78,8 @@ def Validate(user):
         description=input('Description: ')
         if(validate_action(action) & validate_minutes(minutes)):
             user_log_add(user,int(minutes),action,description)
+            #save log
+            db_add_log(db_get_action_id(user.id, action), description, int(minutes))
     elif(msg=='time_total'):
         users_time_spent()
     elif(msg=='time'):
@@ -79,8 +100,18 @@ def Validate(user):
     Validate(user)
 
 #Creates a user
-def user_add(username):
-    users.append(User(username))
+def user_add(username,id):
+    users.append(User(username,id))
+
+#Load data
+def load_data():
+    for user in users:
+        for a in db_load_actions(user.username):
+            user.Log_action_add(a)
+        for l in db_load_logs(user.username):
+            user_log_add(user,l.minutes,l.action,l.description)
+    
+        users_add(user)
 
 #Adds all existing users logs to an array
 def app_users_recollect():
