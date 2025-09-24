@@ -3,7 +3,7 @@ from User import User
 from Log import Log
 from MiniPlot import MiniPlot
 from Pomodoro import Pomodoro
-from Database import db_add_action, db_add_log, db_get_action_id,db_load_actions,db_load_logs,db_load_users,db_add_user,db_logs_search
+from Database import db_add_action, db_add_log, db_get_action_id,db_load_actions,db_load_logs,db_load_users,db_add_user,db_logs_search,db_remove_action
 
 commands_list=[
     'action_add - Adds an action',
@@ -73,6 +73,7 @@ def Validate(user):
     elif(msg=='action_remove'):
         value=input('Action to remove: ')
         user.Log_action_remove(value)
+        db_remove_action(user.username,value)
 
     elif(msg=='log_add'):
         action=input('Action: ')

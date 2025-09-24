@@ -127,3 +127,32 @@ def db_logs_search(username,action):
     logs = cursor.fetchall()
     connection.close()
     return logs
+
+
+#remove actions
+def db_remove_action(username, action):
+    if isinstance(username, tuple):
+        username = username[0]
+    connection = db_connect()
+    cursor = connection.cursor()
+    #logs
+    cursor.execute("""
+        DELETE FROM logs
+        WHERE action_id IN (
+        SELECT id FROM (
+        SELECT actions.id
+        FROM actions
+        JOIN users ON actions.user_id = users.id
+        WHERE users.username = ? AND actions.action LIKE ?));
+    """, (username, action))
+    #action
+    cursor.execute("""
+        DELETE FROM actions
+        WHERE id IN (
+        SELECT actions.id
+        FROM actions
+        JOIN users ON actions.user_id = users.id
+        WHERE users.username = ? AND actions.action LIKE ?);
+    """, (username,action)) 
+    connection.commit()
+    connection.close()

@@ -3,7 +3,7 @@
 |\/| ._  |__  _    _ 
 |  ||| |||(_)(_|_|_> 
 ---------------------
-VERSION: 0.3
+VERSION: 1.0
 ```
 Simple terminal task logger / time manager application with a simple data visualization module and pomodoro timer.
 
@@ -17,9 +17,10 @@ Simple terminal task logger / time manager application with a simple data visual
 - `log_show` : Prints all the user logs.
 - `log_search <action>` : search for all logs given a specific action
 - `visualize` : Visualize the time spent with stars for each action.
+- `visualize_plot <action>` : Visualize the time spent on a specific action with a star for each log.
 - `pomodoro` : Pomodoro, It will ask for task length, break length, quantity of tasks in the session, and to select the tasks.
 - `exit` : Exits the application.
 
-## Note
-This application stores data locally with SQL3
+
+> This application stores data locally with SQL3
 
