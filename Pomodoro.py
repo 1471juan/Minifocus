@@ -18,19 +18,19 @@ class Pomodoro:
             break_length_seconds = break_length_minutes * 60
             #Task
             while task_length_seconds:
-                os.system('clear')
+                os.system('cls' if os.name == 'nt' else 'clear')
                 print(task)
                 print(Pomodoro.timer(task_length_seconds))
                 time.sleep(1)
                 task_length_seconds -= 1
             #Break
             while break_length_seconds:
-                os.system('clear')
+                os.system('cls' if os.name == 'nt' else 'clear')
                 print(task + ' done! Take a break... ')
                 print(Pomodoro.timer(break_length_seconds))
                 time.sleep(1)
                 break_length_seconds -= 1
 
-        os.system('clear')
+        os.system('cls' if os.name == 'nt' else 'clear')
 
         print('Done!')

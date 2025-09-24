@@ -12,4 +12,3 @@ def APP_INIT():
     Validate(users[0])
 
 APP_INIT()
-

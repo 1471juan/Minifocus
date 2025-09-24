@@ -112,7 +112,6 @@ def Validate(user):
         else:
             user_data_visualize_plot(user,param)
         
-
     elif(msg=='pomodoro'):
         user_pomodoro(user)
 
@@ -229,25 +228,26 @@ def user_data_visualize_plot(user,param):
 
     MiniPlot.plot(tmp_logs_time)
 
+#sort and select tasks
 def user_pomodoro_tasks_sort(user,pomodoro_numberOfTasks):
     pomodoro_tasks = []
     while pomodoro_numberOfTasks:
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("Select tasks: ")
         for task in user.USER_LOG_ACTIONS:
             if not task in pomodoro_tasks: print(" -> " + task)
         print("{} tasks remaining.".format(pomodoro_numberOfTasks))
         tmp_task=input("TASK: ")
 
-        i=0
-        while(i<len(user.USER_LOG_ACTIONS)):
-            if tmp_task == user.USER_LOG_ACTIONS[i]:
-                pomodoro_tasks.append(tmp_task)
-                pomodoro_numberOfTasks -= 1
-            else:
-                print('Action not found. Please try again.')
-            i+=1
+        if tmp_task in user.USER_LOG_ACTIONS:
+            pomodoro_tasks.append(tmp_task)
+            pomodoro_numberOfTasks -= 1
+        else:
+            print('Action not found. Please try again.')
+
     return pomodoro_tasks
 
+#pomodoro
 def user_pomodoro(user):
     pomodoro_length=input('Task length(in minutes): ')
     pomodoro_break_length=input('Break length(in minutes): ')
@@ -257,12 +257,12 @@ def user_pomodoro(user):
         print("All parameters should be higher than 0.")
         user_pomodoro(user)
     else:
-        #POMODORO
         pomodoro_tasks = user_pomodoro_tasks_sort(user,int(pomodoro_numberOfTasks))
         Pomodoro.pomodoro(int(pomodoro_length),int(pomodoro_break_length),pomodoro_tasks)
-        #ADD TIME SPENT TO LOG
+        #add time
         for task in pomodoro_tasks:
             user.Log_add(Log(int(pomodoro_length), task, "Pomodoro"))
+            db_add_log(db_get_action_id(user.id, task), "Pomodoro", int(pomodoro_length))
 
 
 
