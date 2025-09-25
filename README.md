@@ -22,5 +22,5 @@ Simple terminal task logger / time manager application with a simple data visual
 - `exit` : Exits the application.
 
 
-> This application stores data locally with SQL3
+> This application stores data locally using SQL
 
